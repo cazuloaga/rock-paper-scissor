@@ -10,13 +10,17 @@
    function computerPlay(){
        let computerChoice = Math.floor(Math.random() * 3);
        if (computerChoice == 0){
-           return "Rock";
+           return "ROCK";
        } else if (computerChoice == 1){
-           return "Paper";
+           return "PAPER";
        } else{
-           return "Scissors"
+           return "SCISSORS"
        }
    } 
+
+   function playerChoice(){
+       return window.prompt("Choose Rock, Paper or Scissors: ").toUpperCase();
+   }
   </script>
 </body>
 </html>
