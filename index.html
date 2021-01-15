@@ -3,12 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Rock Paper Scissors</title>
-</head>
-<body>
-    <h3>Try it out</h3>
-    <p><button onclick="game()">PLAY GAME</button></p>
-
-
   <script>
     let roundWinner=''
     let roundMessage=''
@@ -75,9 +69,9 @@ function playRound(playerSelection,computerSelection){
        } 
        
        
-       window.alert(`computer chose ${computerSelection}`);
-       window.alert(`you chose ${playerSelection}`);
-       window.alert(`round winner ${roundWinner}`);
+       window.alert(`The computer chose ${computerSelection}`);
+       window.alert(`You chose ${playerSelection}`);
+       window.alert(`This round winner is: ${roundWinner}`);
     }
 
    function game(){
@@ -103,5 +97,9 @@ function playRound(playerSelection,computerSelection){
        }                            
    }
   </script>
+</head>
+<body>
+    <h3>Try it out</h3>
+    <p><button onclick="game()">PLAY GAME</button></p>
 </body>
 </html>
