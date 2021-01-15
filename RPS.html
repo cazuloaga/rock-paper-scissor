@@ -2,16 +2,20 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Function scope example</title>
+  <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <p><button onclick="game()">Click me</button></p>
+
 
   <script>
+    let roundWinner=''
+    let roundMessage=''
    function computerPlay(){
-       let computerChoice = Math.floor(Math.random() * 3);
-       if (computerChoice == 0){
+       let computerChoice = Math.floor(Math.random() * 3)+1;
+       if (computerChoice == 1){
            return "ROCK";
-       } else if (computerChoice == 1){
+       } else if (computerChoice == 2){
            return "PAPER";
        } else{
            return "SCISSORS"
@@ -20,6 +24,82 @@
 
    function playerChoice(){
        return window.prompt("Choose Rock, Paper or Scissors: ").toUpperCase();
+   }
+/*
+   function playRound(playerSelection,computerSelection){
+       playerSelection=playerChoice();
+       computerSelection=computerPlay();
+       if ((playerSelection=='ROCK' && computerSelection== 'SCISSORS') || (playerSelection=='PAPER' && computerSelection=='ROCK') || (playerSelection=='SCISSORS' && computerSelection=='PAPER')){
+           let roundWinner='Player';
+           let roundMessage=`You win this round! ${playerSelection} beats ${computerSelection}`;
+       } else if (playerSelection==computerSelection){
+            roundWinner='None'
+            roundMessage=`It's a tie! you both chose ${computerSelection}`;          
+       } else{
+        roundMessage =`You loose this round! ${computerSelection} beats ${playerSelection}`;
+        roundWinner='Computer'
+       }
+       window.alert(`computer chose ${computerSelection}`);
+       window.alert(`you chose ${playerSelection}`);
+       window.alert(`round winner ${roundWinner}`);
+       console.log(roundWinner)
+    }
+*/
+function playRound(playerSelection,computerSelection){
+       playerSelection=playerChoice();
+       computerSelection=computerPlay();
+       roundWinner='';
+       if(playerSelection==computerSelection){
+           roundWinner='None'
+       }else if (playerSelection=='ROCK'){
+           if (computerSelection=='SCISSORS'){
+
+            roundWinner='Player';
+           } else if (computerSelection=='PAPER'){
+                roundWinner='Computer';
+           }
+
+       } else if (playerSelection=='SCISSORS'){
+           if (computerSelection=='PAPER'){
+                roundWinner='Player'
+           }else if(computerSelection=='ROCK'){
+                roundWinner='Computer'
+           }
+       } else {
+           if(computerSelection=='ROCK'){
+               roundWinner='Player'
+           } else if(computerSelection=='SCISSORS'){
+               roundWinner='Computer'
+           }
+       } 
+       
+       
+       window.alert(`computer chose ${computerSelection}`);
+       window.alert(`you chose ${playerSelection}`);
+       window.alert(`round winner ${roundWinner}`);
+    }
+
+   function game(){
+    let playerRounds=0;
+    let computerRounds=0;
+       for (let rounds=1;rounds<=5;rounds++){
+           playRound();
+           if (roundWinner=='Player'){
+               playerRounds+=1;
+           } else if (roundWinner=='Computer'){
+               computerRounds+=1;
+           }
+           window.alert(`Player score: ${playerRounds} vs Computer score: ${computerRounds}`);
+           window.alert(`Rounds to play = ${5 - rounds}`);
+           
+       }
+       if (playerRounds > computerRounds){
+           window.alert(`You win the game ${playerRounds} to ${computerRounds}`);
+       } else if (computerRounds>playerRounds){
+        window.alert(`You loose the game ${playerRounds} to ${computerRounds}. Better luck next time`);
+       }else{
+        window.alert(`It's a tie better luck next time!`);
+       }                            
    }
   </script>
 </body>
