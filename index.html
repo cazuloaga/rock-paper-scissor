@@ -99,10 +99,13 @@
             pwinner.textContent=`This round winner is: ${roundWinner}`
             if (roundsPlayer>roundsCpu){
                 ptotal.textContent=`You win the game! ${roundsPlayer} to ${roundsCpu}`;
+                roundsCpu=0;
             } else if(roundsPlayer<roundsCpu){
                 ptotal.textContent=`You loose the game! ${roundsPlayer} to ${roundsCpu}`;
+                roundsCpu=0;
             } else{
                 ptotal.textContent=`It's a tie! better luck next time`;
+                roundsCpu=0;
             }
             rounds=1;
             roundsCpu=0;
