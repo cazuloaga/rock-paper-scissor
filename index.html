@@ -3,23 +3,129 @@
 <head>
   <meta charset="utf-8">
   <title>Rock Paper Scissors</title>
-  <script>
+</head>
+<body>
+    <h1>Try to beat the computer in five rounds</h1>
+    <div id="playerSelectionBtn">
+        <button id="Rock">Rock</button>
+        <button id="Paper">Paper</button>
+        <button id="Scissors">Scissors</button>
+    </div>
+    <div id='results'>
+        <h3>Results</h3>
+        <p id='rounds'></p>
+        <p id='cpu'></p>
+        <p id='player'></p>
+        <p id='winner'></p>
+        <p id='total'></p>
+        
+    </div>
+</body>
+<script>
+    let rounds=1;
+    let roundsCpu=0;
+    let roundsPlayer=0;
     let roundWinner=''
-    let roundMessage=''
+
+    const buttons=document.querySelectorAll('button');
+    buttons.forEach((button)=>{
+        button.addEventListener('click',()=>{
+            let playerSelection=button.id;
+            computerSelection=computerPlay();
+            roundWinner='';
+            if(playerSelection==computerSelection){
+           roundWinner='None'
+           }else if (playerSelection=='Rock'){
+                if (computerSelection=='Scissors'){
+                   roundWinner='Player';
+                   roundsPlayer+=1;
+                } else if (computerSelection=='Paper'){
+                       roundWinner='Computer';
+                       roundsCpu+=1;
+                }
+
+       } else if (playerSelection=='Scissors'){
+           if (computerSelection=='Paper'){
+                roundWinner='Player';
+                roundsPlayer+=1;
+           }else if(computerSelection=='Rock'){
+                roundWinner='Computer';
+                roundsCpu+=1;
+           }
+       } else {
+           if(computerSelection=='Rock'){
+               roundWinner='Player';
+               roundsPlayer+=1;
+           } else if(computerSelection=='Scissors'){
+               roundWinner='Computer'
+               roundsCpu+=1;
+           }
+       }
+
+        if (rounds<=5){
+        if (rounds<5){
+            const pround=document.querySelector('#rounds');
+            pround.textContent=`Round # ${rounds}`
+        
+
+            const pcpu=document.querySelector('#cpu');
+            pcpu.textContent=`The computer chose: ${computerSelection}`;
+
+            const pplayer=document.querySelector('#player');
+            pplayer.textContent=`You chose: ${playerSelection}`;
+
+            const pwinner=document.querySelector('#winner');
+            pwinner.textContent=`This round winner is: ${roundWinner}`;
+
+            const ptotal=document.querySelector('#total');
+            ptotal.textContent=`Player score: ${roundsPlayer} vs. Computer score: ${roundsCpu}`;
+        
+
+            console.log(`Round # ${rounds}`)
+            console.log(`The computer chose: ${computerSelection}`);
+            console.log(`You chose: ${playerSelection}`);
+            console.log(`This round winner is: ${roundWinner}`);
+            rounds+=1;
+        } else {
+            const pround=document.querySelector('#rounds');
+            const pcpu=document.querySelector('#cpu');
+            const pplayer=document.querySelector('#player');
+            const pwinner=document.querySelector('#winner');
+            const ptotal=document.querySelector('#total');
+
+            pround.textContent=`Round # ${rounds}`;
+            pcpu.textContent=`The computer chose: ${computerSelection}`;
+            pplayer.textContent=`You chose: ${playerSelection}`;
+            pwinner.textContent=`This round winner is: ${roundWinner}`
+            if (roundsPlayer>roundsCpu){
+                ptotal.textContent=`You win the game! ${roundsPlayer} to ${roundsCpu}`;
+            } else if(roundsPlayer<roundsCpu){
+                ptotal.textContent=`You loose the game! ${roundsPlayer} to ${roundsCpu}`;
+            } else{
+                ptotal.textContent=`It's a tie! better luck next time`;
+            }
+            rounds=1;
+            roundsCpu,roundsPlayer=0;            
+        }
+    }
+
+
+
+        });
+
+    });
+
    function computerPlay(){
        let computerChoice = Math.floor(Math.random() * 3)+1;
        if (computerChoice == 1){
-           return "ROCK";
+           return "Rock";
        } else if (computerChoice == 2){
-           return "PAPER";
+           return "Paper";
        } else{
-           return "SCISSORS"
+           return "Scissors"
        }
    } 
 
-   function playerChoice(){
-       return window.prompt("Choose Rock, Paper or Scissors: ").toUpperCase();
-   }
 /*
    function playRound(playerSelection,computerSelection){
        playerSelection=playerChoice();
@@ -40,39 +146,7 @@
        console.log(roundWinner)
     }
 */
-function playRound(playerSelection,computerSelection){
-       playerSelection=playerChoice();
-       computerSelection=computerPlay();
-       roundWinner='';
-       if(playerSelection==computerSelection){
-           roundWinner='None'
-       }else if (playerSelection=='ROCK'){
-           if (computerSelection=='SCISSORS'){
 
-            roundWinner='Player';
-           } else if (computerSelection=='PAPER'){
-                roundWinner='Computer';
-           }
-
-       } else if (playerSelection=='SCISSORS'){
-           if (computerSelection=='PAPER'){
-                roundWinner='Player'
-           }else if(computerSelection=='ROCK'){
-                roundWinner='Computer'
-           }
-       } else {
-           if(computerSelection=='ROCK'){
-               roundWinner='Player'
-           } else if(computerSelection=='SCISSORS'){
-               roundWinner='Computer'
-           }
-       } 
-       
-       
-       window.alert(`The computer chose: ${computerSelection}`);
-       window.alert(`You chose: ${playerSelection}`);
-       window.alert(`This round winner is: ${roundWinner}`);
-    }
 
    function game(){
     let playerRounds=0;
@@ -97,9 +171,4 @@ function playRound(playerSelection,computerSelection){
        }                            
    }
   </script>
-</head>
-<body>
-    <h3>Try it out</h3>
-    <p><button onclick="game()">PLAY GAME</button></p>
-</body>
 </html>
